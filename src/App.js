@@ -1,5 +1,5 @@
 import React from 'react';
-import Pokemon from "./Pokemon";
+const Pokemon = React.lazy(() => import('./Pokemon'))
 
 class App extends React.Component {
   state = {
@@ -19,7 +19,11 @@ class App extends React.Component {
             Show Charmander Description
           </button>
         )}
-        {showPokemonDescription && <Pokemon />}
+        {showPokemonDescription && 
+          <React.Suspense fallback={<p>...Loading</p>}>
+            <Pokemon />
+          </React.Suspense>
+        }
       </div>
     );
   }
